@@ -17,27 +17,21 @@ const events = TechEventMother.collection(3);
 describe("outdated events finder", () => {
   let techEventRepository: TechEventRepository;
 
-  beforeAll(() => {
-    const mockerTechEventRepository = mock<TechEventRepository>();
-    when(mockerTechEventRepository.findOutDatedEvents(1)).thenResolve({
-      events,
-      pages: 1,
-    });
-
-    techEventRepository = instance(mockerTechEventRepository);
-  });
-
-  it("Should instance OutDatedEventsFinder with TechEventRepository", () => {
+  const buildOutdatedEventsFinder = () =>
     new OutDatedEventsFinder(techEventRepository);
+
+  beforeAll(() => {
+    const { TechEventRepository } = TestBed();
+    techEventRepository = TechEventRepository;
   });
 
   it("Should call find outdated events with page 1", () => {
-    const outdatedEventsFinder = new OutDatedEventsFinder(techEventRepository);
+    const outdatedEventsFinder = buildOutdatedEventsFinder();
     outdatedEventsFinder.findOutDatedEvents({ page: 1 });
   });
 
   it("Should return events paginated", async () => {
-    const outdatedEventsFinder = new OutDatedEventsFinder(techEventRepository);
+    const outdatedEventsFinder = buildOutdatedEventsFinder();
     const result = await outdatedEventsFinder.findOutDatedEvents({ page: 1 });
 
     expect(result.events).toBeInstanceOf(Array);
@@ -45,7 +39,7 @@ describe("outdated events finder", () => {
   });
 
   it("Should throw error if page is less than 1", async () => {
-    const outdatedEventsFinder = new OutDatedEventsFinder(techEventRepository);
+    const outdatedEventsFinder = buildOutdatedEventsFinder();
     try {
       await outdatedEventsFinder.findOutDatedEvents({ page: 0 });
     } catch (error) {
@@ -54,9 +48,23 @@ describe("outdated events finder", () => {
   });
 
   it("Should return same events than repository", async () => {
-    const outdatedEventsFinder = new OutDatedEventsFinder(techEventRepository);
+    const outdatedEventsFinder = buildOutdatedEventsFinder();
     const result = await outdatedEventsFinder.findOutDatedEvents({ page: 1 });
 
     expect(result.events).toEqual(events);
   });
 });
+
+const TestBed = () => {
+  const mockerTechEventRepository = mock<TechEventRepository>();
+  when(mockerTechEventRepository.findNextEvents(1)).thenResolve({
+    events,
+    pages: 1,
+  });
+
+  const TechEventRepository = instance(mockerTechEventRepository);
+
+  return {
+    TechEventRepository,
+  };
+};
