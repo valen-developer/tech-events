@@ -1,29 +1,29 @@
 /**
- * [] Should instance OutDatedEventsFinder with TechEventRepository
- * [] Should call OutDatedEventsFinder.findOutDatedEvents with page 1
- * [] Should return OutDatedEventsFinder.findOutDatedEvents result type: { events: TechEvent[], pages: number }
- * [] Should throw error if OutDatedEventsFinder.findOutDatedEvents is called with page < 1
- * [] Should return same events than repository
+ * [v] Should instance OutDatedEventsFinder with TechEventRepository
+ * [v] Should call OutDatedEventsFinder.findOutDatedEvents with page 1
+ * [v] Should return OutDatedEventsFinder.findOutDatedEvents result type: { events: TechEvent[], pages: number }
+ * [v] Should throw error if OutDatedEventsFinder.findOutDatedEvents is called with page < 1
+ * [v] Should return same events than repository
  */
 
 import { instance, mock, when } from "ts-mockito";
-import { OutDatedEventsFinder } from "../../../src/features/Events/application/OutDatedEventsFinder";
-import { TechEventRepository } from "../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
-import { NegativePageNumberException } from "../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
-import { TechEventMother } from "../../helpers/TechEventMother";
+import { OutDatedEventsFinder } from "../../../../src/features/Events/application/OutDatedEventsFinder";
+import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
+import { NegativePageNumberException } from "../../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
+import { TechEventMother } from "../../../helpers/TechEventMother";
 
 const events = TechEventMother.collection(3);
 
 describe("outdated events finder", () => {
   let techEventRepository: TechEventRepository;
 
-  const buildOutdatedEventsFinder = () =>
-    new OutDatedEventsFinder(techEventRepository);
-
   beforeAll(() => {
     const { TechEventRepository } = TestBed();
     techEventRepository = TechEventRepository;
   });
+
+  const buildOutdatedEventsFinder = () =>
+    new OutDatedEventsFinder(techEventRepository);
 
   it("Should call find outdated events with page 1", () => {
     const outdatedEventsFinder = buildOutdatedEventsFinder();
@@ -57,7 +57,7 @@ describe("outdated events finder", () => {
 
 const TestBed = () => {
   const mockerTechEventRepository = mock<TechEventRepository>();
-  when(mockerTechEventRepository.findNextEvents(1)).thenResolve({
+  when(mockerTechEventRepository.findOutDatedEvents(1)).thenResolve({
     events,
     pages: 1,
   });

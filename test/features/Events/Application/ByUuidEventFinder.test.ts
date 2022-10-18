@@ -1,20 +1,22 @@
+/// <reference types="jest" />
+
 /**
- * [] Should instace ByUuidEventFinder with TechEventRepository
- * [] Should call ByUuidEventFinder.findEventByUuid with uuid
- * [] Should return event
- * [] Should throw error if event not found
- * [] Should return same event than repository
- * [] Should call to TechEventsRepository.findEventByUuid(uuid)
+ * [v] Should instace ByUuidEventFinder with TechEventRepository
+ * [v] Should call ByUuidEventFinder.findEventByUuid with uuid
+ * [v] Should return event
+ * [v] Should throw error if event not found
+ * [v] Should return same event than repository
+ * [v] Should call to TechEventsRepository.findEventByUuid(uuid)
  *
  *
  */
 
 import { anyString, instance, mock, when } from "ts-mockito";
-import { ByUuidEventFinder } from "../../../src/features/Events/application/ByUuidEventFinder";
-import { TechEventNotFound } from "../../../src/features/Events/domain/exception/TechEventNotFound.exception";
-import { TechEventRepository } from "../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
-import { TechEvent } from "../../../src/features/Events/domain/TechEvent.model";
-import { TechEventMother } from "../../helpers/TechEventMother";
+import { ByUuidEventFinder } from "../../../../src/features/Events/application/ByUuidEventFinder";
+import { TechEventNotFound } from "../../../../src/features/Events/domain/exception/TechEventNotFound.exception";
+import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
+import { TechEvent } from "../../../../src/features/Events/domain/TechEvent.model";
+import { TechEventMother } from "../../../helpers/TechEventMother";
 
 const notExistEvent = TechEventMother.create();
 

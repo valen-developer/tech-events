@@ -13,10 +13,10 @@
  */
 
 import { instance, mock, spy, verify, when } from "ts-mockito";
-import { NextEventsFinder } from "../../../src/features/Events/application/NextEventsFinder";
-import { TechEventRepository } from "../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
-import { NegativePageNumberException } from "../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
-import { TechEventMother } from "../../helpers/TechEventMother";
+import { NextEventsFinder } from "../../../../src/features/Events/application/NextEventsFinder";
+import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
+import { NegativePageNumberException } from "../../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
+import { TechEventMother } from "../../../helpers/TechEventMother";
 
 const events = TechEventMother.collection(3);
 
