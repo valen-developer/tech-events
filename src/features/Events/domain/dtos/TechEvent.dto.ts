@@ -1,1 +1,3 @@
-export interface TechEventDto {}
+export interface TechEventDto {
+  uuid: string;
+}

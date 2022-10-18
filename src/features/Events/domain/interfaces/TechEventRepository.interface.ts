@@ -8,4 +8,6 @@ export abstract class TechEventRepository {
   public abstract findOutDatedEvents(
     page: number
   ): Promise<Paginated<TechEvent[], "events">>;
+
+  public abstract findEventByUuid(uuid: string): Promise<TechEvent>;
 }
