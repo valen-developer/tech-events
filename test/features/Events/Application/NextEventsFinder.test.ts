@@ -1,4 +1,5 @@
 /// <reference types="jest" />
+import "reflect-metadata";
 
 /**
  * checking driven development

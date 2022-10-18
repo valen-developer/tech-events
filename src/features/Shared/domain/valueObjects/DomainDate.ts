@@ -5,16 +5,7 @@ export class DomainDate extends NotNullValueObject<Date> {
     super(value);
   }
 
-  public toYYMMDD(): string {
-    const numberYear = this.value.getFullYear();
-    const numberMonth = this.value.getMonth() + 1;
-    const numberDay = this.value.getDate();
-
-    const stringYear = numberYear.toString();
-    const stringMonth =
-      numberMonth < 10 ? `0${numberMonth}` : numberMonth.toString();
-    const stringDay = numberDay < 10 ? `0${numberDay}` : numberDay.toString();
-
-    return `${stringYear}/${stringMonth}/${stringDay}`;
+  public toDDMMYYYY(): string {
+    return this.value.toLocaleDateString("es-ES");
   }
 }

@@ -8,6 +8,13 @@ export class TechEventMother {
   public static create(props: Partial<TechEventDto> = {}): TechEvent {
     const defaultProps: TechEventDto = {
       uuid: faker.uuid(),
+      title: faker.words(),
+      shortDescription: faker.words(10),
+      date: {
+        initDate: faker.domainDate(),
+        endDate: faker.domainDate(),
+      },
+      location: faker.words(2),
     };
 
     return new TechEvent({
