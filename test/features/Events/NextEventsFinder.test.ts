@@ -3,11 +3,11 @@
 /**
  * checking driven development
  *
- * [] Should instance NextEventsFinder with TechEventRepository
- * [] Should call NextEventsFinder.findNextEvents with 1
- * [] Should return NextEventFinder.findNextEvents result type: { events: TechEvent[], pages: number }
- * [] Should throw error if NextEventsFinder.findNextEvents is called with page < 1
- * [] Should return same events than repository
+ * [v] Should instance NextEventsFinder with TechEventRepository
+ * [v] Should call NextEventsFinder.findNextEvents with 1
+ * [v] Should return NextEventFinder.findNextEvents result type: { events: TechEvent[], pages: number }
+ * [v] Should throw error if NextEventsFinder.findNextEvents is called with page < 1
+ * [v] Should return same events than repository
  *
  *
  */
@@ -75,7 +75,10 @@ describe("Next event finder", () => {
 
 const TestBed = () => {
   const mockerTechEventRepository = mock<TechEventRepository>();
-  when(mockerTechEventRepository.findNextEvents(1)).thenResolve(events);
+  when(mockerTechEventRepository.findNextEvents(1)).thenResolve({
+    events,
+    pages: 1,
+  });
 
   return {
     TechEventRepository: instance(mockerTechEventRepository),

@@ -10,11 +10,13 @@ export class NextEventsFinder {
     page: number;
   }): Promise<Paginated<TechEvent, "events">> {
     const page = new PageNumber(props.page);
-    const events = await this.eventRepository.findNextEvents(page.valueOf());
+    const { events, pages } = await this.eventRepository.findNextEvents(
+      page.valueOf()
+    );
 
     return {
       events,
-      pages: 1,
+      pages,
     };
   }
 }
