@@ -22,6 +22,7 @@
     "@badeball/cypress-cucumber-preprocessor": "^13.0.2",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@faker-js/faker": "^7.6.0",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
