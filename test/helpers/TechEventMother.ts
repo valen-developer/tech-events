@@ -10,6 +10,7 @@ export class TechEventMother {
       uuid: faker.uuid(),
       title: faker.words(),
       shortDescription: faker.words(10),
+      description: faker.words(100),
       date: {
         initDate: faker.domainDate(),
         endDate: faker.domainDate(),

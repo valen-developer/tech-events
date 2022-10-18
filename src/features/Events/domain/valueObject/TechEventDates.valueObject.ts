@@ -18,4 +18,8 @@ export class TechEventDates extends NotNullValueObject<TechEventDateDto> {
   public endDate(): DomainDate {
     return this.value.endDate;
   }
+
+  public intervalString(): string {
+    return `${this.initDate().toDDMMYYYYHHMM()} · ${this.endDate().toDDMMYYYYHHMM()}`;
+  }
 }
