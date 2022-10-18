@@ -1,14 +1,13 @@
 import "reflect-metadata";
 
 import { render, screen } from "@testing-library/react";
-
 import { act } from "react-dom/test-utils";
 import { instance, mock, when } from "ts-mockito";
-import { container } from "tsyringe";
 import { TechEventDto } from "../../../../src/features/Events/domain/dtos/TechEvent.dto";
 import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
 import { TechEvent } from "../../../../src/features/Events/domain/TechEvent.model";
 import { NextEventsCollection } from "../../../../src/features/Events/presentation/components/NextEventsCollection/NextEventsCollection";
+import { TestDepsRegister } from "../../../helpers/DepsRegister";
 import { TechEventMother } from "../../../helpers/TechEventMother";
 
 /**
@@ -49,7 +48,7 @@ describe("NextEventsCollection", () => {
 
   beforeAll(() => {
     const { TechEventRepository } = TestBed();
-    DepsRegister({ TechEventRepository });
+    TestDepsRegister.registerTechRepository(TechEventRepository);
   });
 
   it("Should render a NextEventsCollection component", () => {
@@ -92,12 +91,4 @@ const TestBed = () => {
   return {
     TechEventRepository: instance(mockedEventsRepository),
   };
-};
-
-const DepsRegister = (deps: { TechEventRepository: TechEventRepository }) => {
-  const { TechEventRepository } = deps;
-
-  container.register("TechEventRepository", {
-    useValue: TechEventRepository,
-  });
 };
