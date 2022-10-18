@@ -15,9 +15,9 @@
 import { instance, mock, spy, verify, when } from "ts-mockito";
 import { NextEventsFinder } from "../../../src/features/Events/application/NextEventsFinder";
 import { TechEventRepository } from "../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
-import { TechEvent } from "../../../src/features/Events/domain/TechEvent.model";
+import { TechEventMother } from "../../helpers/TechEventMother";
 
-const events = [new TechEvent()];
+const events = TechEventMother.collection(3);
 
 describe("Next event finder", () => {
   let techEventRepository: TechEventRepository;
