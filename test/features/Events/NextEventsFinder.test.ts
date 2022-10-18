@@ -15,6 +15,7 @@
 import { instance, mock, spy, verify, when } from "ts-mockito";
 import { NextEventsFinder } from "../../../src/features/Events/application/NextEventsFinder";
 import { TechEventRepository } from "../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
+import { NegativePageNumberException } from "../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
 import { TechEventMother } from "../../helpers/TechEventMother";
 
 const events = TechEventMother.collection(3);
@@ -52,8 +53,11 @@ describe("Next event finder", () => {
   });
 
   it("Should throw error if page is less than 1", async () => {
-    const result = findNextEvents(-1);
-    await expect(result).rejects.toThrowError();
+    try {
+      await findNextEvents(0);
+    } catch (error) {
+      expect(error).toBeInstanceOf(NegativePageNumberException);
+    }
   });
 
   it("Should call to TechEventsRepository.findNextEvents(page)", async () => {

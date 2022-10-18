@@ -1,4 +1,5 @@
 import { Paginated } from "../../../core/types/Paginated.type";
+import { PageNumber } from "../../Shared/domain/valueObjects/PageNumber.valueObject";
 import { TechEventRepository } from "../domain/interfaces/TechEventRepository.interface";
 import { TechEvent } from "../domain/TechEvent.model";
 
@@ -8,11 +9,8 @@ export class NextEventsFinder {
   public async findNextEvents(props: {
     page: number;
   }): Promise<Paginated<TechEvent, "events">> {
-    if (props.page < 0) {
-      throw new Error("Page number must be positive");
-    }
-
-    const events = await this.eventRepository.findNextEvents(props.page);
+    const page = new PageNumber(props.page);
+    const events = await this.eventRepository.findNextEvents(page.valueOf());
 
     return {
       events,
