@@ -8,3 +8,15 @@ export interface TechEventDto {
   date: TechEventDateDto;
   location: string;
 }
+
+export interface TechEventSeriariable {
+  uuid: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  date: {
+    initDate: string;
+    endDate: string;
+  };
+  location: string;
+}
