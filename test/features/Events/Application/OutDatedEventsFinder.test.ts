@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 /**
  * [v] Should instance OutDatedEventsFinder with TechEventRepository
  * [v] Should call OutDatedEventsFinder.findOutDatedEvents with page 1

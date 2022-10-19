@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import { NextEventsCollection } from "../features/Events/presentation/components/NextEventsCollection/NextEventsCollection";
 
 const Home: NextPage = () => {
-  return <h1>Hello, World</h1>;
+  return <NextEventsCollection />;
 };
 
 export default Home;

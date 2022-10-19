@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { container } from "tsyringe";
 import { OutDatedEventsFinder } from "../../../application/OutDatedEventsFinder";
 import { TechEvent } from "../../../domain/TechEvent.model";
+import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
 
 export const OutdatedEventsCollection = () => {
   const [events, setEvents] = useState<TechEvent[]>([]);
@@ -17,16 +18,5 @@ export const OutdatedEventsCollection = () => {
     handleFindEvents();
   }, []);
 
-  return (
-    <div>
-      {events.map((event) => (
-        <div key={event.uuid.value}>
-          <span>{event.title.value}</span>
-          <span>{event.shortDescription.value}</span>
-          <span>{event.getInitDate().toDDMMYYYY()}</span>
-          <span>{event.location.value}</span>
-        </div>
-      ))}
-    </div>
-  );
+  return <TechEventCollection events={events} />;
 };

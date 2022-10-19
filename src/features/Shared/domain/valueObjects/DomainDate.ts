@@ -5,6 +5,16 @@ export class DomainDate extends NotNullValueObject<Date> {
     super(value);
   }
 
+  public static today(): DomainDate {
+    return new DomainDate(new Date());
+  }
+
+  public isAfter(than: DomainDate): boolean {
+    const subject = than.value.getDate();
+
+    return subject > this.value.getDate();
+  }
+
   public toDDMMYYYY(): string {
     return this.value.toLocaleDateString("es-ES");
   }
