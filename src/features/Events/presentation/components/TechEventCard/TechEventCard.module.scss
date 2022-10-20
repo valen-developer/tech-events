@@ -5,14 +5,20 @@
 
   border: 1px solid var(--text-primary);
   border-radius: var(--border-radius);
+  height: 27.125rem;
+  overflow: hidden;
 
-  &_image {
-    width: 100%;
-    height: 100px;
+  background-color: var(--background-card);
+}
 
-    & * {
-      object-fit: cover;
-      object-position: center;
-    }
-  }
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+
+@mixin card__meta {
+  // include clamp_3 and text-sm
+   
 }
