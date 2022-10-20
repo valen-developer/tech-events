@@ -7,6 +7,9 @@ import { TechEventLocation } from "./valueObject/TechEventLocation.valueObject";
 import { TechEventShortDescription } from "./valueObject/TechEventShortDescription.valueObject";
 import { TechEventTitle } from "./valueObject/TechEventTitle.valueObject";
 
+
+
+
 export class TechEvent {
   public readonly uuid: Uuid;
   public readonly title: TechEventTitle;

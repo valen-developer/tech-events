@@ -22,14 +22,16 @@ export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
 
   return (
     <div className={styles.card}>
-      <Image
-        loader={imageLoader}
-        src={imgUrl}
-        alt={`${event.title.value} cover`}
-        layout="responsive"
-        width="100"
-        height="100"
-      />
+      <div className={styles.card_image}>
+        <Image
+          loader={imageLoader}
+          src={imgUrl}
+          alt={`${event.title.value} cover`}
+          width="100%"
+          height="100%"
+        />
+      </div>
+
       <span>{event.title.value}</span>
       <span>{event.shortDescription.value}</span>
       <span>{event.getInitDate().toDDMMYYYY()}</span>
