@@ -9,17 +9,18 @@ import { TechEvent } from "../../../../src/features/Events/domain/TechEvent.mode
 import { NextEventsCollection } from "../../../../src/features/Events/presentation/components/NextEventsCollection/NextEventsCollection";
 import { TestDepsRegister } from "../../../helpers/DepsRegister";
 import { TechEventMother } from "../../../helpers/TechEventMother";
+import { DomainDate } from "../../../../src/features/Shared/domain/valueObjects/DomainDate";
 
 /**
  * [v] Should render a NextEventsCollection component
  * [v] Should have a title for each event
  * [v] Should have a sort description for each event
- * [v] Should have a init date for each event in format dd/mm/yyyy
+ * [v] Should have a init date for each event in format dd/mm/yyyy and after today
  * [v] Should have a location for each event
  *
  */
 
-const events = TechEventMother.collection(3);
+const events = TechEventMother.nextEventCollection(3);
 
 describe("NextEventsCollection", () => {
   const renderNextEventCollection = async () => {
@@ -51,10 +52,6 @@ describe("NextEventsCollection", () => {
     TestDepsRegister.registerTechRepository(TechEventRepository);
   });
 
-  it("Should render a NextEventsCollection component", () => {
-    render(<NextEventsCollection />);
-  });
-
   it("Should have a title for each event", async () => {
     await renderNextEventCollection();
     assertEventsCollectionPropertyInDocument(events, "title");
@@ -65,14 +62,28 @@ describe("NextEventsCollection", () => {
     assertEventsCollectionPropertyInDocument(events, "shortDescription");
   });
 
-  it("Should have a init date for each event", async () => {
+  it("Should have a init date for each event and after today", async () => {
     await renderNextEventCollection();
 
-    events.forEach((event) => {
-      expect(
-        screen.getByText(event.getInitDate().toDDMMYYYY())
-      ).toBeInTheDocument();
+    events.forEach((event, i) => {
+      const initDateAsText = event.getInitDate().toDDMMYYYY();
+      const textInScreen = screen.getAllByText(initDateAsText);
+      const actualText = textInScreen[i];
+
+      expect(actualText).toBeInTheDocument();
+
+      console.log(initDateAsText);
+
+      const initDate = new DomainDate(event.getInitDate().value);
+
+      console.log(initDate.toDDMMYYYY());
+
+      const today = DomainDate.today();
+
+      expect(initDate.isAfter(today)).toBeTruthy();
     });
+
+    screen.debug();
   });
 
   it("Should have a location for each event", async () => {
