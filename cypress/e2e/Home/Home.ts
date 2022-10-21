@@ -6,6 +6,10 @@ Given("A user enter to home page", () => {
   cy.visit("/");
 });
 
+Then("User see message {string}", (message: string) => {
+  cy.contains(message);
+});
+
 Then("User see next events", () => {
   cy.wrap(findNextEvents()).then((subject: any) => {
     const { events } = subject as { events: TechEvent[] };

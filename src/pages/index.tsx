@@ -6,6 +6,7 @@ import { AppLayout } from "../features/Shared/presentation/layout/AppLayout/AppL
 const Home: NextPage = () => {
   return (
     <AppLayout>
+      <h1>Todos los eventos tecnológicos en un mismo lugar.</h1>
       <NextEventsCollection />
       <OutdatedEventsCollection/>
     </AppLayout>

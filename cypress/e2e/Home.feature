@@ -1,6 +1,8 @@
-Feature: Next and outdated events at home page
+Feature: A user enter to home page
 
-    All users want see next and updated events at home page
+    Scenario: A welcome message is displayed at home page
+      Given A user enter to home page
+      Then User see message "Todos los eventos tecnológicos en un mismo lugar."
 
     Scenario: User see next events at home page
         Given A user enter to home page
