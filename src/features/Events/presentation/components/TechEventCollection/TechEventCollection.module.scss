@@ -1,3 +1,13 @@
+.collection_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  & h2 {
+    font-size: 3rem;
+  }
+}
+
 .collection {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
