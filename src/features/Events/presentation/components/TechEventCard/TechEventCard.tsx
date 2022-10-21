@@ -17,9 +17,6 @@ export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
   };
 
   useEffect(() => {
-    console.log("entra");
-    console.log(event.uuid.value);
-
     setImgUrl(url);
   }, [event]);
 
