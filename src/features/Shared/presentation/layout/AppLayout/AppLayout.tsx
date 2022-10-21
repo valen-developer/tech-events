@@ -8,7 +8,7 @@ interface AppLayoutProps {
 
 export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div>
+    <div className={styles.app_layout} >
       <div className={styles.navbar__container}></div>
       <div className={styles.content__container}>{children}</div>
     </div>

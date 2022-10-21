@@ -1,8 +1,19 @@
+.app_layout{
+  height: 100%;
+  width: 100%;
+}
+
 .content__container {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
 
-  padding: 3rem;
+  padding: 0 12%;
+}
+
+@media (max-width: 768px) {
+  .content__container {
+    padding: 0 5%;
+  }
 }

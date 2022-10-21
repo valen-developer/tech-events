@@ -34,12 +34,14 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .header {
     flex-direction: column-reverse;
+    align-items: flex-start;
     gap: 1rem;
   }
   .header__message {
+    width: 100%;
     & h1 {
       font-size: 3rem;
     }

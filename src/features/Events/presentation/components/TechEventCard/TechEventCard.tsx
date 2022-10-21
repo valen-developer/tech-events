@@ -9,26 +9,27 @@ interface TechEventCardProps {
 }
 
 export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
-  const [imgUrl, setImgUrl] = useState("https://picsum.photos/200/300");
-  const url = "https://picsum.photos/400/2010";
-
-  const imageLoader = () => {
-    return url;
-  };
-
+  const [imgUrl, setImgUrl] = useState("");
+  
+  
+  
   useEffect(() => {
+    const randomHeight = Math.floor(Math.random() * 10) + 300;
+    const url = `https://picsum.photos/400/${randomHeight}`;
     setImgUrl(url);
   }, [event]);
 
   return (
     <div className={styles.card}>
-      <Image
+      {/* <Image
         loader={imageLoader}
         src={imgUrl}
         alt={`${event.title.value} cover`}
         width="100%"
         height="200"
-      />
+      /> */}
+
+      <img src={imgUrl} alt={`${event.title.value} cover`} />
 
       <div className={styles.card__content}>
         <h3>{event.title.value}</h3>
