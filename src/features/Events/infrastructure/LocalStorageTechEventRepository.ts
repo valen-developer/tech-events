@@ -19,7 +19,10 @@ export class LocalStorageTechEventRepository implements TechEventRepository {
     );
 
     const pages = filtered.length / this.COUNT_FOR_PAGE;
-    const sliced = filtered.slice(0, 10);
+    const sliced = filtered.slice(
+      (page - 1) * this.COUNT_FOR_PAGE,
+      page * this.COUNT_FOR_PAGE
+    );
 
     return {
       events: sliced,
@@ -27,10 +30,23 @@ export class LocalStorageTechEventRepository implements TechEventRepository {
     };
   }
 
-  public findOutDatedEvents(
+  public async findOutDatedEvents(
     page: number
   ): Promise<Paginated<TechEvent[], "events">> {
-    throw new Error("Method not implemented.");
+    const filtered = [...this.events].filter((e) =>
+      e.dates.endDate().isBefore(DomainDate.today())
+    );
+
+    const pages = filtered.length / this.COUNT_FOR_PAGE;
+    const sliced = filtered.slice(
+      (page - 1) * this.COUNT_FOR_PAGE,
+      page * this.COUNT_FOR_PAGE
+    );
+
+    return {
+      events: sliced,
+      pages,
+    };
   }
 
   public findEventByUuid(uuid: string): Promise<TechEvent> {

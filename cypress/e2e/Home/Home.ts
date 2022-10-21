@@ -11,8 +11,25 @@ Then("User see next events", () => {
     const { events } = subject as { events: TechEvent[] };
 
     events.forEach((e) => {
+      const slicedDescription = e.shortDescription.value.slice(0, 50);
+
       cy.contains(e.title.value);
-      cy.contains(e.shortDescription.value);
+      cy.contains(slicedDescription);
+      cy.contains(e.getInitDate().toDDMMYYYY());
+      cy.contains(e.location.value);
+    });
+  });
+});
+
+Then("User see outdated events", () => {
+  cy.wrap(findOutedEvents()).then((subject: any) => {
+    const { events } = subject as { events: TechEvent[] };
+
+    events.forEach((e) => {
+      const slicedDescription = e.shortDescription.value.slice(0, 50);
+
+      cy.contains(e.title.value);
+      cy.contains(slicedDescription);
       cy.contains(e.getInitDate().toDDMMYYYY());
       cy.contains(e.location.value);
     });
@@ -24,6 +41,16 @@ const findNextEvents = () => {
     const page = 1;
     const eventRepository = new LocalStorageTechEventRepository();
     eventRepository.findNextEvents(page).then(({ events }) => {
+      resolve({ events });
+    });
+  });
+};
+
+const findOutedEvents = () => {
+  return new Cypress.Promise((resolve, reject) => {
+    const page = 1;
+    const eventRepository = new LocalStorageTechEventRepository();
+    eventRepository.findOutDatedEvents(page).then(({ events }) => {
       resolve({ events });
     });
   });
