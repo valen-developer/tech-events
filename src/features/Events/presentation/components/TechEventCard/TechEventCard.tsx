@@ -36,13 +36,13 @@ export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
       <div className={styles.card__content}>
         <h3>{event.title.value}</h3>
 
-        <p className={`clamp_3 text-sm ${styles.card__meta} `}>
-          {event.shortDescription.value}
-        </p>
+        <p className={`clamp_3 text-sm`}>{event.shortDescription.value}</p>
 
         <div className={styles.card__footer}>
-          <span>{event.getInitDate().toDDMMYYYY()}</span>
-          <span>{event.location.value}</span>
+          <span className={`clamp_3 text-sm`}>
+            {event.getInitDate().toDDMMYYYY()}
+          </span>
+          <span className={`clamp_3 text-sm`}>{event.location.value}</span>
         </div>
       </div>
     </div>
