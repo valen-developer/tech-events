@@ -19,5 +19,7 @@ export const NextEventsCollection = () => {
     handleFindNextEvents();
   }, []);
 
-  return <TechEventCollection events={events} title={title} />;
+  return (
+    <TechEventCollection events={events} title={title} link="/next-events" />
+  );
 };
