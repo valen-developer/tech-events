@@ -10,9 +10,15 @@ export class DomainDate extends NotNullValueObject<Date> {
   }
 
   public isAfter(than: DomainDate): boolean {
-    const subject = than.value.getDate();
+    const thisDate = this.value.getTime();
 
-    return subject > this.value.getDate();
+    return thisDate > than.value.getTime();
+  }
+
+  public isBefore(than: DomainDate): boolean {
+    const thisDate = this.value.getTime();
+
+    return thisDate < than.value.getTime();
   }
 
   public toDDMMYYYY(): string {

@@ -6,15 +6,18 @@ import "reflect-metadata";
  * [v] Should return OutDatedEventsFinder.findOutDatedEvents result type: { events: TechEvent[], pages: number }
  * [v] Should throw error if OutDatedEventsFinder.findOutDatedEvents is called with page < 1
  * [v] Should return same events than repository
+ * [] Should return end date previous than today
+ *
  */
 
 import { instance, mock, when } from "ts-mockito";
 import { OutDatedEventsFinder } from "../../../../src/features/Events/application/OutDatedEventsFinder";
 import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
 import { NegativePageNumberException } from "../../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
+import { DomainDate } from "../../../../src/features/Shared/domain/valueObjects/DomainDate";
 import { TechEventMother } from "../../../helpers/TechEventMother";
 
-const events = TechEventMother.collection(3);
+const events = TechEventMother.outdatedEventCollection(3);
 
 describe("outdated events finder", () => {
   let techEventRepository: TechEventRepository;
@@ -26,11 +29,6 @@ describe("outdated events finder", () => {
 
   const buildOutdatedEventsFinder = () =>
     new OutDatedEventsFinder(techEventRepository);
-
-  it("Should call find outdated events with page 1", () => {
-    const outdatedEventsFinder = buildOutdatedEventsFinder();
-    outdatedEventsFinder.findOutDatedEvents({ page: 1 });
-  });
 
   it("Should return events paginated", async () => {
     const outdatedEventsFinder = buildOutdatedEventsFinder();
@@ -54,6 +52,20 @@ describe("outdated events finder", () => {
     const result = await outdatedEventsFinder.findOutDatedEvents({ page: 1 });
 
     expect(result.events).toEqual(events);
+  });
+
+  it("Should return end date previous than today", async () => {
+    const outdatedEventsFinder = buildOutdatedEventsFinder();
+    const { events } = await outdatedEventsFinder.findOutDatedEvents({
+      page: 1,
+    });
+
+    events.forEach((event) => {
+      const today = DomainDate.today();
+      const isBeforeToday = event.getEndDate().isBefore(today);
+
+      expect(isBeforeToday).toBeTruthy();
+    });
   });
 });
 
