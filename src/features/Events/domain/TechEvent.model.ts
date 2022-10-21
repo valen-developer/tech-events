@@ -7,9 +7,6 @@ import { TechEventLocation } from "./valueObject/TechEventLocation.valueObject";
 import { TechEventShortDescription } from "./valueObject/TechEventShortDescription.valueObject";
 import { TechEventTitle } from "./valueObject/TechEventTitle.valueObject";
 
-
-
-
 export class TechEvent {
   public readonly uuid: Uuid;
   public readonly title: TechEventTitle;
@@ -40,6 +37,10 @@ export class TechEvent {
 
   public getInitDate(): DomainDate {
     return this.dates.initDate();
+  }
+
+  public getEndDate(): DomainDate {
+    return this.dates.endDate();
   }
 
   public toJson(): TechEventDto {

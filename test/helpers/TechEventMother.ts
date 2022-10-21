@@ -30,4 +30,36 @@ export class TechEventMother {
   ): TechEvent[] {
     return Array.from({ length: len }, () => this.create(props));
   }
+
+  public static outdatedEventCollection(
+    len = 3,
+    props: Partial<TechEventDto> = {}
+  ): TechEvent[] {
+    return Array.from({ length: len }, () =>
+      this.create({
+        ...props,
+        date: {
+          initDate: faker.domainDate("2020-01-01"),
+          endDate: faker.domainDate("2020-01-01"),
+        },
+      })
+    );
+  }
+
+  public static nextEventCollection(
+    len = 3,
+    props: Partial<TechEventDto> = {}
+  ) {
+    const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+    return Array.from({ length: len }, () =>
+      this.create({
+        ...props,
+        date: {
+          initDate: faker.domainDate(tomorrow.toISOString()),
+          endDate: faker.domainDate(tomorrow.toISOString()),
+        },
+      })
+    );
+  }
 }

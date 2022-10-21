@@ -9,7 +9,7 @@ import "reflect-metadata";
  * [v] Should return NextEventFinder.findNextEvents result type: { events: TechEvent[], pages: number }
  * [v] Should throw error if NextEventsFinder.findNextEvents is called with page < 1
  * [v] Should return same events than repository
- *
+ * [ ] Should return start date after than today
  *
  */
 
@@ -17,9 +17,10 @@ import { instance, mock, spy, verify, when } from "ts-mockito";
 import { NextEventsFinder } from "../../../../src/features/Events/application/NextEventsFinder";
 import { TechEventRepository } from "../../../../src/features/Events/domain/interfaces/TechEventRepository.interface";
 import { NegativePageNumberException } from "../../../../src/features/Shared/domain/exception/NegativePageNumber.exception";
+import { DomainDate } from "../../../../src/features/Shared/domain/valueObjects/DomainDate";
 import { TechEventMother } from "../../../helpers/TechEventMother";
 
-const events = TechEventMother.collection(3);
+const events = TechEventMother.nextEventCollection(3);
 
 describe("Next event finder", () => {
   let techEventRepository: TechEventRepository;
@@ -36,15 +37,6 @@ describe("Next event finder", () => {
     const nextEventsFinder = buildNextEventsFinder();
     return await nextEventsFinder.findNextEvents({ page });
   };
-
-  it("Should instance NextEventsFinder with TechEventRepository", () => {
-    const nextEventsFinder = buildNextEventsFinder();
-    expect(nextEventsFinder).toBeDefined();
-  });
-
-  it("Should call NextEventsFinder.findNextEvents with 1", async () => {
-    findNextEvents(1);
-  });
 
   it("Should return events paginated", async () => {
     const result = await findNextEvents(1);
@@ -71,6 +63,16 @@ describe("Next event finder", () => {
   it("Should return same events than repository", async () => {
     const result = await findNextEvents(1);
     expect(result.events).toEqual(events);
+  });
+
+  it("Should return start date after than today", async () => {
+    const { events } = await findNextEvents(1);
+    const today = DomainDate.today();
+
+    events.forEach((event) => {
+      const isAfterToday = event.getInitDate().isAfter(today);
+      expect(isAfterToday).toBeTruthy();
+    });
   });
 });
 
