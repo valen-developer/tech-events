@@ -1,22 +1,38 @@
-import { useEffect, useState } from "react";
-import { container } from "tsyringe";
-import { NextEventsFinder } from "../../../application/NextEventsFinder";
-import { TechEvent } from "../../../domain/TechEvent.model";
+import { PaginateButtons } from "../../../../Shared/presentation/components/PaginateButtons/PaginateButtons";
+import { useFetchNextEvents } from "../../../infrastructure/hooks/useFetchNextEvents";
 import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
 
 export const NextEventsCollection = () => {
-  const [events, setEvents] = useState<TechEvent[]>([]);
+  const {
+    events,
+    handleNextPage,
+    handlePreviousPage,
+    error,
+    isLoading,
+    currentPage,
+    totalPages,
+  } = useFetchNextEvents();
 
-  useEffect(() => {
-    const nextEventsFinder = container.resolve(NextEventsFinder);
+  const onPrevious = () => {
+    handlePreviousPage();
+  };
+  const onNext = () => {
+    handleNextPage();
+  };
 
-    const handleFindNextEvents = async () => {
-      const { events } = await nextEventsFinder.findNextEvents({ page: 1 });
-      setEvents(events);
-    };
+  if (error) return <div>{error}</div>;
 
-    handleFindNextEvents();
-  }, []);
+  if (isLoading) return <div>Loading...</div>;
 
-  return <TechEventCollection events={events} />;
+  return (
+    <>
+      <TechEventCollection events={events} />
+      <PaginateButtons
+        onNext={onNext}
+        onPrevious={onPrevious}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
+    </>
+  );
 };

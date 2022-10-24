@@ -1,5 +1,6 @@
 @import "./themes.scss";
 @import "./misc.scss";
+@import "./buttons.scss";
 
 html,
 body {
@@ -10,7 +11,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-#__next, .app {
+#__next,
+.app {
   height: 100%;
   width: 100%;
   overflow-y: auto;
