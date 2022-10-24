@@ -1,22 +1,39 @@
-import { useEffect, useState } from "react";
-import { container } from "tsyringe";
-import { OutDatedEventsFinder } from "../../../application/OutDatedEventsFinder";
-import { TechEvent } from "../../../domain/TechEvent.model";
+import { PaginateButtons } from "../../../../Shared/presentation/components/PaginateButtons/PaginateButtons";
+import { useFetchOutdatedEvents } from "../../../infrastructure/hooks/useFetchOutdatedEvents";
 import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
 
 export const OutdatedEventsCollection = () => {
-  const [events, setEvents] = useState<TechEvent[]>([]);
+  const {
+    events,
+    error,
+    isLoading,
+    currentPage,
+    totalPages,
+    handleNextPage,
+    handlePreviousPage,
+  } = useFetchOutdatedEvents();
 
-  useEffect(() => {
-    const eventsFinder = container.resolve(OutDatedEventsFinder);
+  const onPrevious = () => {
+    handlePreviousPage();
+  };
 
-    const handleFindEvents = async () => {
-      const { events } = await eventsFinder.findOutDatedEvents({ page: 1 });
-      setEvents(events);
-    };
+  const onNext = () => {
+    handleNextPage();
+  };
 
-    handleFindEvents();
-  }, []);
+  if (error) return <div>{error}</div>;
 
-  return <TechEventCollection events={events} />;
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <>
+      <TechEventCollection events={events} />
+      <PaginateButtons
+        onNext={onNext}
+        onPrevious={onPrevious}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
+    </>
+  );
 };
