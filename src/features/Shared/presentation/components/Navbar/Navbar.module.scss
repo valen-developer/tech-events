@@ -17,6 +17,12 @@
   }
 }
 
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .navbar__links {
   list-style: none;
 

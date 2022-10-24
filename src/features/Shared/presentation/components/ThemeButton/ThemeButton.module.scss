@@ -1,0 +1,15 @@
+$width: 50px;
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+  color: var(--text-primary);
+
+  width: $width;
+  height: $width;
+  border-radius: 50%;
+  padding: 0.25rem;
+}

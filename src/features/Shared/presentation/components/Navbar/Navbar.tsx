@@ -1,4 +1,7 @@
 import Link from "next/link";
+import React from "react";
+import { THEMES, useTheme } from "../../providers/ThemeProvider";
+import { ThemeButton } from "../ThemeButton/ThemeButton";
 import styles from "./Navbar.module.scss";
 
 export const Navbar = () => {
@@ -19,7 +22,10 @@ export const Navbar = () => {
             <Link href={"/outdated-events"}>Pasados</Link>
           </li>
         </ul>
-        <div className={styles.navbar__actions}></div>
+
+        <div className={styles.navbar__actions}>
+          <ThemeButton />
+        </div>
       </div>
     </nav>
   );
