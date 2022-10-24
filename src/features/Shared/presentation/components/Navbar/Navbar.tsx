@@ -1,6 +1,4 @@
 import Link from "next/link";
-import React from "react";
-import { THEMES, useTheme } from "../../providers/ThemeProvider";
 import { ThemeButton } from "../ThemeButton/ThemeButton";
 import styles from "./Navbar.module.scss";
 
@@ -9,7 +7,11 @@ export const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.navbar__left}>
         <h1 className={styles.navbar__title}>
-          eventos<span>.wiki</span>
+          <Link href="/">
+            <div>
+              eventos<span>.wiki</span>
+            </div>
+          </Link>
         </h1>
       </div>
 
