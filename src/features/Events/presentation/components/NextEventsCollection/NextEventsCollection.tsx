@@ -5,7 +5,6 @@ import { TechEvent } from "../../../domain/TechEvent.model";
 import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
 
 export const NextEventsCollection = () => {
-  const title = "Próximos eventos";
   const [events, setEvents] = useState<TechEvent[]>([]);
 
   useEffect(() => {
@@ -19,7 +18,5 @@ export const NextEventsCollection = () => {
     handleFindNextEvents();
   }, []);
 
-  return (
-    <TechEventCollection events={events} title={title} link="/next-events" />
-  );
+  return <TechEventCollection events={events} />;
 };

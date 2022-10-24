@@ -5,7 +5,6 @@ import { TechEvent } from "../../../domain/TechEvent.model";
 import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
 
 export const OutdatedEventsCollection = () => {
-  const title = "Eventos pasados";
   const [events, setEvents] = useState<TechEvent[]>([]);
 
   useEffect(() => {
@@ -19,5 +18,5 @@ export const OutdatedEventsCollection = () => {
     handleFindEvents();
   }, []);
 
-  return <TechEventCollection events={events} title={title} />;
+  return <TechEventCollection events={events} />;
 };
