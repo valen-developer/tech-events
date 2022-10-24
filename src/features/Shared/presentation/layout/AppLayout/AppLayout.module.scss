@@ -1,6 +1,13 @@
-.app_layout{
+$padding: 0 12%;
+$paddingMobile: 0 5%;
+
+.app_layout {
   height: 100%;
   width: 100%;
+}
+
+.navbar__container {
+  padding: $padding;
 }
 
 .content__container {
@@ -9,11 +16,14 @@
   height: 100%;
   width: 100%;
 
-  padding: 0 12%;
+  padding: $padding;
 }
 
 @media (max-width: 768px) {
+  .navbar__container {
+    padding: $paddingMobile;
+  }
   .content__container {
-    padding: 0 5%;
+    padding: $paddingMobile;
   }
 }

@@ -1,0 +1,25 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 2rem 0;
+}
+
+.navbar__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  color: var(--primary);
+
+  & span {
+    color: var(--text-primary);
+  }
+}
+
+.navbar__links {
+  list-style: none;
+
+  display: flex;
+  gap: 1rem;
+}
