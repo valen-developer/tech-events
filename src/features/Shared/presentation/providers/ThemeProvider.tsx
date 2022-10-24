@@ -28,7 +28,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         setTheme,
       }}
     >
-      <div className={theme}>{children}</div>
+      <div className={`${theme} smooth`}>{children}</div>
     </ThemeContext.Provider>
   );
 };
