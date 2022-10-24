@@ -24,10 +24,14 @@ export class LocalStorageTechEventRepository implements TechEventRepository {
       page * this.COUNT_FOR_PAGE
     );
 
-    return {
-      events: sliced,
-      pages,
-    };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          events: sliced,
+          pages,
+        });
+      }, 2000);
+    });
   }
 
   public async findOutDatedEvents(
@@ -43,10 +47,14 @@ export class LocalStorageTechEventRepository implements TechEventRepository {
       page * this.COUNT_FOR_PAGE
     );
 
-    return {
-      events: sliced,
-      pages,
-    };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          events: sliced,
+          pages,
+        });
+      }, 2000);
+    });
   }
 
   public findEventByUuid(uuid: string): Promise<TechEvent> {

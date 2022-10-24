@@ -1,6 +1,9 @@
 import { PaginateButtons } from "../../../../Shared/presentation/components/PaginateButtons/PaginateButtons";
 import { useFetchOutdatedEvents } from "../../../infrastructure/hooks/useFetchOutdatedEvents";
-import { TechEventCollection } from "../TechEventCollection/TechEventCollection";
+import {
+  TechEventCollection,
+  TechEventCollectionShimmer,
+} from "../TechEventCollection/TechEventCollection";
 
 export const OutdatedEventsCollection = () => {
   const {
@@ -23,11 +26,14 @@ export const OutdatedEventsCollection = () => {
 
   if (error) return <div>{error}</div>;
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <>
-      <TechEventCollection events={events} />
+      {isLoading ? (
+        <TechEventCollectionShimmer />
+      ) : (
+        <TechEventCollection events={events} />
+      )}
+
       <PaginateButtons
         onNext={onNext}
         onPrevious={onPrevious}

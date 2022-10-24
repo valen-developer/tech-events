@@ -28,3 +28,16 @@ export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
     </div>
   );
 };
+
+export const TechEventCardShimmer: FC = () => {
+  return (
+    <div className={styles.card}>
+      <div className={`${styles.shimmer__image} shimmer`}></div>
+
+      <div className={`${styles.card__content}`}>
+        <div className={`${styles.shimmer__text} shimmer`} style={{width: '80%'}} ></div>
+        <div className={`${styles.shimmer__text} shimmer`}></div>
+      </div>
+    </div>
+  );
+};
