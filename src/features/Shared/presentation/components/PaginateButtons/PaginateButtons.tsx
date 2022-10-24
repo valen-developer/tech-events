@@ -39,17 +39,22 @@ export const PaginateButtons: FC<PaginateButtonsProps> = ({
 
   return (
     <div className={styles.buttons__container}>
-      {showPrevious && (
+      {showPrevious ? (
         <button
           onClick={(e) => onClick(e, onPrevious)}
           className="btn btn-invert-secondary"
         >
           Previous
         </button>
+      ) : (
+        <div></div>
       )}
 
       {showNext && (
-        <button onClick={(e) => onClick(e, onNext)} className="btn btn-primary">
+        <button
+          onClick={(e) => onClick(e, onNext)}
+          className={`btn btn-primary ${styles.last}`}
+        >
           Next
         </button>
       )}
