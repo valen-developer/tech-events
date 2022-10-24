@@ -1,5 +1,6 @@
 :root {
   --border-radius: 0.5rem;
+  --button-border-radius: 1rem;
 }
 
 .text-sm {
@@ -31,5 +32,17 @@
 @keyframes shimmer {
   100% {
     -webkit-mask-position: left;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

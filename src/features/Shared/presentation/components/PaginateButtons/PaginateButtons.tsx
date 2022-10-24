@@ -42,7 +42,7 @@ export const PaginateButtons: FC<PaginateButtonsProps> = ({
       {showPrevious ? (
         <button
           onClick={(e) => onClick(e, onPrevious)}
-          className="btn btn-invert-secondary"
+          className="btn btn-primary-invert"
         >
           Previous
         </button>

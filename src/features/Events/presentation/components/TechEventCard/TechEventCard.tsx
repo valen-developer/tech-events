@@ -13,7 +13,7 @@ export const TechEventCard: FC<TechEventCardProps> = ({ event }) => {
     <div className={styles.card}>
       <TechEventCardImage eventTitle={event.title.value} />
 
-      <div className={styles.card__content}>
+      <div className={`${styles.card__content} fade-in`}>
         <h3>{event.title.value}</h3>
 
         <p className={`clamp_3 text-sm`}>{event.shortDescription.value}</p>
@@ -35,7 +35,10 @@ export const TechEventCardShimmer: FC = () => {
       <div className={`${styles.shimmer__image} shimmer`}></div>
 
       <div className={`${styles.card__content}`}>
-        <div className={`${styles.shimmer__text} shimmer`} style={{width: '80%'}} ></div>
+        <div
+          className={`${styles.shimmer__text} shimmer`}
+          style={{ width: "80%" }}
+        ></div>
         <div className={`${styles.shimmer__text} shimmer`}></div>
       </div>
     </div>

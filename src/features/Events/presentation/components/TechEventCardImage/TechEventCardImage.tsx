@@ -21,7 +21,7 @@ export const TechEventCardImage: FC<TechEventCardImageProps> = ({
   if (!imgUrl) return <div className={styles.image__container}>Loading...</div>;
 
   return (
-    <div className={styles.image__container}>
+    <div className={`${styles.image__container} fade-in`}>
       <img src={imgUrl} alt={`${eventTitle} cover`} className={styles.image} />
     </div>
   );
